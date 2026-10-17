@@ -5,6 +5,13 @@ export const navigationItems = [
   { label: 'Education', href: '#education' },
 ];
 
+export const profile = {
+  homePath: '/',
+  email: 'rsaketh033@gmail.com',
+  location: 'Guntur, India',
+  interests: ['software engineering', 'web development', 'Python', 'machine learning'],
+};
+
 export const projects = [
   {
     number: '01', category: 'WEB PLATFORM', title: 'Discover Andhra Pradesh',
@@ -16,7 +23,7 @@ export const projects = [
   {
     number: '02', category: 'ATTENDANCE SYSTEM', title: 'Smart Attendance System',
     description: 'A classroom attendance workflow combining face recognition, eye-blink liveness checks, and geolocation-based access control.',
-    technologies: ['Python', 'Flask', 'React Native', 'Machine learning'], cover: 'attendance-art', coverLabel: 'Abstract attendance verification interface showing face, blink, and location checks',
+    technologies: ['Python', 'Flask', 'React Native', 'REST APIs', 'Machine learning'], cover: 'attendance-art', coverLabel: 'Abstract attendance verification interface showing face, blink, and location checks',
     repositoryUrl: 'https://github.com/Saketh-CSE/Smart-Webcam-attendance-System',
     liveUrl: 'https://attendance-management-system-using-gamma.vercel.app/',
   },

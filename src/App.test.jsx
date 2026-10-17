@@ -11,7 +11,7 @@ describe('portfolio page', () => {
     for (const id of ['about', 'projects', 'skills', 'education', 'certifications', 'contact']) {
       expect(document.getElementById(id)).toBeInTheDocument();
     }
-    expect(screen.getByText('Only answers about this portfolio')).toBeInTheDocument();
+    expect(screen.getByText('Saketh’s projects, skills, and background')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Explore projects' })).toHaveAttribute('href', '#projects');
 
     const projectLinks = screen.getAllByRole('link');

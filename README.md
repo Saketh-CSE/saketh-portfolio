@@ -1,6 +1,6 @@
 # Saketha Ram portfolio
 
-A responsive, single-page portfolio built with React, Vite, Lucide React, and Framer Motion. The UI is rendered from JSX components; content is organized in `src/data/portfolio.js`.
+A responsive, single-page portfolio built with React, Vite, Lucide React, and Framer Motion. The UI is rendered from JSX components; profile, project, and skills content is organized in `src/data/portfolio.js`, with recruiter preferences in `src/data/careerPreferences.js`.
 
 ## Install and run
 
