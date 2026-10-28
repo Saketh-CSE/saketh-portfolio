@@ -7,3 +7,8 @@ if (!globalThis.IntersectionObserver) {
     disconnect() {}
   };
 }
+
+
+if (typeof HTMLCanvasElement !== 'undefined') {
+  HTMLCanvasElement.prototype.getContext = function getContext() { return null; };
+}

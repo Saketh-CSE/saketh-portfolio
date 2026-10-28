@@ -7,6 +7,8 @@ import './styles/portfolio.css';
 import './styles/glass.css';
 import './styles/chat.css';
 import './styles/responsive.css';
+import './styles/interactions.css';
+import './styles/cinematic.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

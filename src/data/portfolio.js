@@ -6,6 +6,7 @@ export const navigationItems = [
 ];
 
 export const profile = {
+  fullName: 'Bhimavarapu Saketha Ram',
   homePath: '/',
   email: 'rsaketh033@gmail.com',
   location: 'Guntur, India',

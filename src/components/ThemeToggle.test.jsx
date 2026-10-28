@@ -27,4 +27,16 @@ describe('ThemeToggle', () => {
     render(<ThemeProvider><ThemeToggle /></ThemeProvider>);
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
   });
+
+  it('keeps the final theme consistent when toggled rapidly', async () => {
+    const user = userEvent.setup();
+    render(<ThemeProvider><ThemeToggle /></ThemeProvider>);
+    await user.click(screen.getByRole('button', { name: 'Switch to dark theme' }));
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+    expect(document.documentElement).toHaveAttribute('data-theme-transitioning', 'true');
+
+    await user.click(screen.getByRole('button', { name: 'Switch to light theme' }));
+    expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+    expect(localStorage.getItem('portfolio-theme')).toBe('light');
+  });
 });

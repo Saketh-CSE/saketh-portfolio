@@ -1,10 +1,11 @@
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { navigationItems } from '../data/portfolio.js';
+import { navigationItems, profile } from '../data/portfolio.js';
+import MagneticCTA from './MagneticCTA.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
-export default function Navbar() {
+export default function Navbar({ isInert = false }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const menuButtonRef = useRef(null);
@@ -31,12 +32,12 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  return <header className="site-header">
-    <a className="wordmark" href="#top" aria-label="Saketha Ram, home"><span className="wordmark-mark">SR</span><span className="wordmark-name">Saketha Ram</span></a>
+  return <header className="site-header" aria-hidden={isInert || undefined} inert={isInert || undefined}>
+    <a className="wordmark" href="#top" aria-label={`${profile.fullName}, home`}><span className="wordmark-mark">SR</span><span className="wordmark-name">{profile.fullName}</span></a>
     <button ref={menuButtonRef} className="menu-toggle" type="button" aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={menuOpen} aria-controls="primary-nav" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X size={17} /> : <Menu size={17} />}</button>
     <nav className={`nav-panel${menuOpen ? ' is-open' : ''}`} id="primary-nav" aria-label="Main navigation">
       <div className="nav-links">{navigationItems.map((item) => <a href={item.href} key={item.href} aria-current={activeSection === item.href ? 'location' : undefined} onClick={() => { setActiveSection(item.href); setMenuOpen(false); }}>{item.label}{activeSection === item.href && <motion.span className="nav-indicator" layoutId="nav-indicator" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}</a>)}</div>
-      <div className="nav-actions"><ThemeToggle /><a className="nav-contact" href="#contact" onClick={() => setMenuOpen(false)}>Let’s talk <ArrowUpRight size={14} aria-hidden="true" /></a></div>
+      <div className="nav-actions"><ThemeToggle /><MagneticCTA onClick={() => setMenuOpen(false)} /></div>
     </nav>
   </header>;
 }

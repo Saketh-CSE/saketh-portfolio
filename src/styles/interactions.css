@@ -1,0 +1,108 @@
+/* Theme reveal and the existing navbar CTA's magnetic tendrils. */
+.theme-toggle { position: relative; overflow: hidden; }
+.theme-toggle-icon { position: absolute; inset: 0; display: grid; place-items: center; }
+
+html[data-theme-transitioning="true"] :where(body, body *) {
+  transition: color 1s cubic-bezier(.19,.76,.24,1),
+    background-color 1s cubic-bezier(.19,.76,.24,1),
+    border-color 1s cubic-bezier(.19,.76,.24,1),
+    box-shadow 1s cubic-bezier(.19,.76,.24,1),
+    fill 1s cubic-bezier(.19,.76,.24,1),
+    stroke 1s cubic-bezier(.19,.76,.24,1);
+}
+
+.theme-eclipse {
+  position: fixed;
+  z-index: 49;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: clip-path, transform;
+  background: radial-gradient(ellipse at var(--origin-x) var(--origin-y), var(--eclipse-glow), transparent 40vmax);
+  mix-blend-mode: soft-light;
+}
+
+.theme-eclipse__orb {
+  position: absolute;
+  width: clamp(180px, 34vmax, 520px);
+  aspect-ratio: 1;
+  border: 1px solid var(--eclipse-ring);
+  border-radius: 50%;
+  opacity: .58;
+  transform: translate(-50%, -50%);
+  animation: eclipse-bloom 1.02s cubic-bezier(.19,.76,.24,1) both;
+}
+
+.theme-eclipse--light { --eclipse-ring: rgba(183, 130, 55, .62); --eclipse-glow: rgba(241, 204, 128, .34); }
+.theme-eclipse--light .theme-eclipse__orb {
+  background: radial-gradient(circle, rgba(255,250,225,.72) 0 34%, rgba(230,177,87,.34) 35% 43%, transparent 69%);
+  box-shadow: 0 0 0 17px rgba(224, 175, 93, .1), 0 0 90px rgba(230, 177, 87, .22);
+}
+
+.theme-eclipse--dark { --eclipse-ring: rgba(123, 169, 160, .48); --eclipse-glow: rgba(91, 143, 133, .2); }
+.theme-eclipse--dark .theme-eclipse__orb {
+  background: radial-gradient(circle at 37% 33%, rgba(214,184,127,.25), rgba(18,31,29,.38) 38%, transparent 69%);
+  box-shadow: 0 0 0 17px rgba(105, 159, 149, .08), 0 0 100px rgba(91, 143, 133, .17);
+}
+
+@keyframes eclipse-bloom {
+  0% { opacity: 0; scale: .42; rotate: -16deg; }
+  48% { opacity: .82; }
+  100% { opacity: .52; scale: 1.04; rotate: 0deg; }
+}
+
+.nav-contact { position: relative; z-index: 1; transform: translate3d(0,0,0); }
+.nav-contact.is-magnetic { transition: background .2s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-eclipse { display: none; }
+  .theme-eclipse__orb { animation: none; }
+}
+
+/* Full-viewport render stage for the adapted Nexus WebGL Venom CTA. */
+.venom-stage {
+  z-index: 51;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.venom-stage canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.venom-gl-canvas { z-index: 10; }
+.venom-fx-canvas { z-index: 25; }
+.venom-hand-canvas { z-index: 30; }
+.venom-cta-slot {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+.venom-cta-link {
+  position: fixed !important;
+  z-index: 20 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  font-size: 13px;
+  line-height: 1.15;
+  white-space: nowrap;
+  text-decoration: none;
+  transform-origin: center;
+}
+.nav-contact.venom-cta-link:hover { background: transparent; transform: translate3d(0, 0, 0); }
+.nav-contact.venom-cta-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+

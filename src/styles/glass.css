@@ -1,40 +1,47 @@
 /* Shared glass surfaces, ambient lighting and depth hierarchy. */
+@property --glass-primary { syntax: "<color>"; inherits: true; initial-value: rgba(255,255,255,.57); }
+@property --glass-secondary { syntax: "<color>"; inherits: true; initial-value: rgba(255,255,255,.38); }
+@property --glass-quiet { syntax: "<color>"; inherits: true; initial-value: rgba(255,255,255,.26); }
+@property --glass-outline { syntax: "<color>"; inherits: true; initial-value: rgba(255,255,255,.7); }
+@property --glass-reflection { syntax: "<color>"; inherits: true; initial-value: rgba(255,255,255,.66); }
+@property --ambient-teal { syntax: "<color>"; inherits: true; initial-value: rgba(50,108,103,.1); }
+@property --ambient-gold { syntax: "<color>"; inherits: true; initial-value: rgba(168,126,66,.12); }
 :root {
-  --glass-primary: rgba(255, 255, 255, 0.57);
-  --glass-secondary: rgba(255, 255, 255, 0.38);
-  --glass-quiet: rgba(255, 255, 255, 0.26);
-  --glass-outline: rgba(255, 255, 255, 0.7);
-  --glass-reflection: rgba(255, 255, 255, 0.66);
-  --glass-shadow: 0 24px 64px rgba(49, 67, 53, 0.1), 0 3px 12px rgba(49, 67, 53, 0.045);
-  --glass-inset: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 0 -1px 0 rgba(255, 255, 255, 0.12);
-  --ambient-sage: rgba(174, 201, 178, 0.46);
-  --ambient-sand: rgba(223, 207, 179, 0.31);
+  --glass-primary: rgba(250, 247, 239, 0.72);
+  --glass-secondary: rgba(250, 247, 239, 0.55);
+  --glass-quiet: rgba(250, 247, 239, 0.39);
+  --glass-outline: rgba(152, 122, 75, 0.24);
+  --glass-reflection: rgba(255, 253, 246, 0.72);
+  --glass-shadow: 0 24px 64px rgba(34, 31, 24, 0.1), 0 3px 12px rgba(34, 31, 24, 0.045);
+  --glass-inset: inset 0 1px 0 rgba(255, 255, 255, 0.74), inset 0 -1px 0 rgba(65, 58, 44, 0.07);
+  --ambient-teal: rgba(50, 108, 103, 0.1);
+  --ambient-gold: rgba(168, 126, 66, 0.12);
   --glass-blur: 22px;
 }
 
 :root[data-theme="dark"] {
-  --glass-primary: rgba(35, 44, 38, 0.62);
-  --glass-secondary: rgba(39, 49, 42, 0.47);
-  --glass-quiet: rgba(42, 52, 45, 0.33);
-  --glass-outline: rgba(231, 239, 226, 0.19);
-  --glass-reflection: rgba(230, 240, 230, 0.12);
-  --glass-shadow: 0 28px 68px rgba(0, 0, 0, 0.22), 0 3px 16px rgba(0, 0, 0, 0.1);
-  --glass-inset: inset 0 1px 0 rgba(240, 249, 237, 0.15), inset 0 -1px 0 rgba(240, 249, 237, 0.035);
-  --ambient-sage: rgba(72, 112, 85, 0.24);
-  --ambient-sand: rgba(125, 103, 73, 0.15);
+  --glass-primary: rgba(20, 27, 25, 0.9);
+  --glass-secondary: rgba(23, 32, 30, 0.82);
+  --glass-quiet: rgba(31, 43, 40, 0.68);
+  --glass-outline: rgba(218, 188, 133, 0.22);
+  --glass-reflection: rgba(236, 228, 205, 0.12);
+  --glass-shadow: 0 28px 68px rgba(0, 0, 0, 0.4), 0 3px 16px rgba(0, 0, 0, 0.2);
+  --glass-inset: inset 0 1px 0 rgba(236, 228, 205, 0.12), inset 0 -1px 0 rgba(236, 228, 205, 0.035);
+  --ambient-teal: rgba(69, 132, 123, 0.12);
+  --ambient-gold: rgba(177, 126, 57, 0.085);
 }
 
-:root[data-theme="dark"] .hero-art { color: #b7d2bf; }
-:root[data-theme="dark"] .hero-art .art-coordinate { color: #b7d2bf; }
-:root[data-theme="dark"] .hero-art .art-orbit { border-color: rgba(190, 219, 196, 0.3); }
-:root[data-theme="dark"] .hero-art .art-route { background: rgba(190, 219, 196, 0.42); }
+:root[data-theme="dark"] .hero-art { color: var(--art-ink); }
+:root[data-theme="dark"] .hero-art .art-coordinate { color: var(--art-ink); }
+:root[data-theme="dark"] .hero-art .art-orbit { border-color: rgba(128, 170, 162, 0.34); }
+:root[data-theme="dark"] .hero-art .art-route { background: rgba(128, 170, 162, 0.42); }
 :root[data-theme="dark"] .hero-art .art-route::before,
-:root[data-theme="dark"] .hero-art .art-route::after { border-color: #b7d2bf; background: #29342d; }
-:root[data-theme="dark"] .map-art { background: #29372e; color: #c2d9c7; }
-:root[data-theme="dark"] .map-lines { background-image: repeating-radial-gradient(ellipse at 70% 48%, transparent 0 22px, rgba(190, 219, 196, 0.22) 23px 24px, transparent 25px 39px); }
-:root[data-theme="dark"] .map-art::after { border-color: rgba(190, 219, 196, 0.42); box-shadow: 0 0 0 18px rgba(255,255,255,.025), 0 0 0 37px rgba(190,219,196,.1); }
-:root[data-theme="dark"] .map-pin { background: #e8eee7; color: #29372e; }
-:root[data-theme="dark"] .attendance-art { background: #303831; color: #d0ddce; }
+:root[data-theme="dark"] .hero-art .art-route::after { border-color: var(--art-ink); background: #18211f; }
+:root[data-theme="dark"] .map-art { background: var(--map-bg); color: var(--map-ink); }
+:root[data-theme="dark"] .map-lines { background-image: repeating-radial-gradient(ellipse at 70% 48%, transparent 0 22px, rgba(128, 170, 162, 0.22) 23px 24px, transparent 25px 39px); }
+:root[data-theme="dark"] .map-art::after { border-color: rgba(128, 170, 162, 0.42); box-shadow: 0 0 0 18px rgba(255,255,255,.025), 0 0 0 37px rgba(128,170,162,.1); }
+:root[data-theme="dark"] .map-pin { background: #dbe5dd; color: #22302d; }
+:root[data-theme="dark"] .attendance-art { background: var(--attendance-bg); color: var(--attendance-ink); }
 :root[data-theme="dark"] .restaurant-art { background: #38372f; color: #e2d5bd; }
 :root[data-theme="dark"] .restaurant-dish em { color: #c3aa87; }
 :root[data-theme="dark"] .dish-ring { border-color: #c3aa87; box-shadow: 0 0 0 11px #38372f, 0 0 0 12px #c3aa8755, 0 0 0 27px #38372f, 0 0 0 28px #c3aa8730; }
@@ -44,9 +51,9 @@ html { background: var(--bg); }
 body {
   background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse at 13% 7%, var(--ambient-sage), transparent 34rem),
-    radial-gradient(ellipse at 89% 22%, var(--ambient-sand), transparent 31rem),
-    radial-gradient(ellipse at 58% 69%, var(--ambient-sage), transparent 38rem),
+    radial-gradient(ellipse at 13% 7%, var(--ambient-teal), transparent 34rem),
+    radial-gradient(ellipse at 89% 22%, var(--ambient-gold), transparent 31rem),
+    radial-gradient(ellipse at 58% 69%, var(--ambient-teal), transparent 38rem),
     linear-gradient(145deg, var(--bg), var(--paper) 48%, var(--bg));
   background-attachment: fixed;
 }
@@ -55,7 +62,7 @@ body::before {
   position: fixed;
   z-index: -1;
   inset: 0;
-  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(80, 91, 78, 0.018) 4px);
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(108, 94, 69, 0.018) 4px);
   content: "";
   pointer-events: none;
 }
@@ -131,7 +138,7 @@ body::before {
   width: 76%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.62), rgba(174, 201, 178, 0.2) 42%, transparent 72%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--paper) 62%, transparent), color-mix(in srgb, var(--teal) 12%, transparent) 42%, transparent 72%);
   content: "";
   filter: blur(14px);
   animation: ambient-drift 17s ease-in-out infinite alternate;
@@ -148,7 +155,7 @@ body::before {
   pointer-events: none;
 }
 
-.art-coordinate { text-shadow: 0 10px 36px rgba(39, 88, 68, 0.1); }
+.art-coordinate { text-shadow: 0 10px 36px color-mix(in srgb, var(--teal) 16%, transparent); }
 
 .glass-profile {
   position: absolute;
